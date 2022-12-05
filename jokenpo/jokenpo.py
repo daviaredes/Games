@@ -1,46 +1,51 @@
 from random import choice
+from time import sleep
 
-contador_vitoria = 0
-contador_derrota = 0
-contador_empate = 0
+vitoria = 0
+derrota = 0
+empate = 0
 
-def main():
+
+def contador(vitoria, derrota, empate):
+
+    cont = str(input('Quer continuar jogando, Diguite sim para continuar e nao para sair:').lower().strip()[0])
+    sleep(1)
+
+    if cont == 's':
+        main(vitoria, derrota, empate)  
+    elif cont == 'n':
+        rodadas = (vitoria + derrota) + empate
+        print(f'Obrigado por jogar em nossa maquina Voce jogou {rodadas} rodadas Ganhou em {vitoria} delas, Empatou em {empate} delas e Perdeu em {derrota} delas')
+        
+
+def main(vitoria, derrota, empate):
 
     print('Bem vindo ao Jokenpo se divirtam-se\nAs opçoes são \nPedra 🌑\nPapel 📜\nTesoura ✂️')
 
     bot = choice(['papel', 'pedra', 'tesoura'])
 
-
-    def contador():
-        cont = str(input('Quer continuar jogando, Diguite sim para continuar e nao para sair:').lower().strip()[0])
-        if cont == 's':
-            main()
-        elif cont == 'n':
-            rodadas = contador_vitoria + contador_derrota + contador_empate
-            print(f'Obrigado por jogar em nossa maquina Voce jogou {rodadas} rodadas Ganhou em {contador_vitoria} delas e Perdeu em {contador_derrota} delas')
-
-
     while True:
-        
+
         player = str(input('Opçao escolha: ').lower().strip())
-              
+        if player == "papel" or "pedra" or "tesoura":
+            pass
+
         if player == bot:
-            print('Empate os doi ganharam:')
-            contador_empate + 1
-            contador()
+            print('Empate os dois ganharam:')
+            empate += 1
+            sleep(1)
+            contador(vitoria, derrota, empate)
 
         elif player == "pedra" and bot == "tesoura" or player == "papel" and bot == "pedra" or player == "tesoura" and bot == "papel":
             print('Parabens voce ganhou')
-            contador_vitoria + 1
-            contador()
+            vitoria += 1
+            sleep(1)
+            contador(vitoria, derrota, empate)
 
-        elif bot == "pedra" and player == "tesoura" or bot == "papel" and player == "pedra, " or bot == "tesoura" and player == "papel":
+        elif bot == "pedra" and player == "tesoura" or bot == "papel" and player == "pedra" or bot == "tesoura" and player == "papel":
             print('Voce perdeu ')
-            contador_derrota + 1
-            contador()
+            derrota += 1
+            sleep(1)
+            contador(vitoria, derrota, empate)
 
-        elif player != "papel" or "pedra" or "tesoura":
-            print('Erro 404')
-            break
-
-main()
+main(vitoria, derrota, empate)
