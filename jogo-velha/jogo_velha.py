@@ -2,26 +2,39 @@ from PySimpleGUI import *
 
 theme('DarkGrey14')
 
+
+def opçao():
+    layout = [
+        [Button('X'), Text('OU'), Button('O')]
+    ]
+
+    return Window('Opçao', layout=layout, default_button_element_size=(5, 2), auto_size_buttons=False) 
+
+
+Window_popup = opçao()
+
+
 layout = [
-    [Checkbox('X'), Txt('OU'), Checkbox('O')],
     [Button(), Button(), Button()],
     [Button(), Button(), Button()],
     [Button(), Button(), Button()],
-    [Button('Jogar')],
+    [Submit('Jogar', key='continuar')],
 ]
+
 
 Jan = FlexForm('', layout=layout, default_button_element_size=(5, 2), auto_size_buttons=False)
 
-Valor= ''
+Valor = ''
+
 while True:
 
     button, values = Jan.Read()
+           
+    if Valor == 'continuar':
+        Window_popup()
 
-    # teste
-    if Valor == '':
-        print('ola')
     if button == None:
         break
     else:
         Valor += button
-        print(Valor)
+        
