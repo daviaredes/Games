@@ -14,14 +14,21 @@ def start():
         start()
 
 
-def bot(board, bot_option):
+def bot(board, board_bot, bot_option):
     from random import randint
     bot = randint(1, 9)
-    board[bot - 1] = bot_option
+    l = len(board[bot - 1])
+    if l == 1:
+        bot = randint(1, 9)
+    else:
+        board_bot[bot - 1] = bot_option
+        pass
 
 
 def main():
     board = [[], [], [], [], [], [], [], [], []]
+    board_bot = [[], [], [], [], [], [], [], [], []]
+
     start()
 
     while True:
@@ -41,12 +48,19 @@ def main():
                 elif scorer == 2:
                     board[player_move - 1] = 'O'
                     bot_option = 'X'
+                    
+                if board[0] and board[1] and board[2] == 'X' or board[3] and board[4] and board[5] == 'X' or board[6] and board[7] and board[8] == 'X':
+                    print('X ganhou')
+                    break
+                elif board[0] and board[1] and board[2] == 'O' or board[3] and board[4] and board[5] == 'O' or board[6] and board[7] and board[8] == 'O':
+                    print('O ganhou')
+                    break
             except:
                 print('\n   No to this option, the choice goes from 1 to 9 only\n')
                 continue
 
-        bot(board, bot_option)
-        print(f' _{board[0]}_|_{board[1]}_|_{board[2]}_ \n _{board[3]}_|_{board[4]}_|_{board[5]}_\n  {board[6]} | {board[7]} | {board[8]} \n')
-    
+        bot(board, board_bot, bot_option)
+        board = board_bot
+        print(board)
+
 main()
- 
