@@ -1,5 +1,3 @@
-rounds = 0
-
 def start():
     global scorer
     print('Welcome to Tic Tac Toe\n ___|___|___ \n ___|___|___\n    |   |   ')
@@ -22,10 +20,10 @@ def bot(board, bot_option):
     from random import randint
     opponent_bot = randint(1, 9)
     checker_bot = len(board[opponent_bot - 1])
+    
     if checker_bot == 1:
-       print('bot e igaul')
-       pass
-    else:
+       bot(board, bot_option)
+    elif checker_bot == 0:
         board[opponent_bot- 1] = bot_option
         pass
 
@@ -45,15 +43,16 @@ def main():
             if checker_player == 1:
                 print('Has already been played in this house try another one')
                 continue
-            
             if scorer == 1:
                 board[player_move - 1] = 'X'
                 bot_option = 'O'
             elif scorer == 2:
                 board[player_move - 1] = 'O'
                 bot_option = 'X'
-                
-            if board[0] and board[1] and board[2] == 'X' or board[3] and board[4] and board[5] == 'X' or board[6] and board[7] and board[8] == 'X':
+
+            bot(board, bot_option)
+
+            if board[0] == 'X' and board[1] == 'X' and board[2] == 'X' or board[3] == 'X' and board[4] == 'X' and board[5] == 'X' or board[6] == 'X' and board[7] == 'X' and board[8] == 'X':
                 print('X ganhou')
                 break
             elif board[0] == 'O' and board[1] == 'O' and board[2] == 'O' or board[3] == 'O' and board[4] == 'O' and board[5] == 'O' or board[6] == 'O' and board[7] == 'O' and board[8] == 'O':
@@ -63,8 +62,7 @@ def main():
         except:
             print('\n   No to this option, the choice goes from 1 to 9 only\n')
             continue
-
-        bot(board, bot_option)
-        print(board)
+        finally:
+            print(*board, sep=" ")
 
 main()
