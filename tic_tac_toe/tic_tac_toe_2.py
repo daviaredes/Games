@@ -11,6 +11,7 @@ def start():
             print('\n  Well, basically the 9 positions of your choice win whoever has 3 X or 3 O in the same direction, horizontally, vertically or diagonally \n')
             print(' _1_|_2_|_3_ \n _4_|_5_|_6_\n  7 | 8 | 9 \n')
             start()
+            
     except:
         print('\nNo to this option, Choose 1 = X 2 = O or 3 = tutorial\n')
         start()
@@ -68,7 +69,7 @@ def main():
     start()
   
     while True:
-    
+
         player()
 
         global player_2_symbol
@@ -80,10 +81,8 @@ def main():
             player_2_symbol = 'X'
         
         layout()
-    
-        player_2()
-
-            # Horizontally
+        
+            # Horizontally    
         if board[0] =='X' and board[3] =='X' and board[6] =='X' or board[1] =='X' and board[4] =='X' and board[7] =='X' or board[2] =='X' and board[5] =='X' and board[8] =='X':
             print('Congratulations X won, come back and play whenever you want')
             break
@@ -104,5 +103,10 @@ def main():
         elif board[0] == 'O'  and  board[4] == 'O' and  board[8] == 'O' or  board[2] == 'O' and board[4] == 'O' and board[6] == 'O':
             print('Congratulations O won, come back and play whenever you want')
             break
-
+        if len(board[0]) and  len(board[1]) and len(board[2]) and len(board[3]) and len(board[4]) and len(board[5]) and len(board[6]) and len(board[7]) and len(board[8]) == 1:
+            print('Neither the X nor the O won, it was a tie or old')
+            break
+        
+        player_2()
+    
 main()
